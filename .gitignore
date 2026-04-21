@@ -12,6 +12,7 @@ backend/data/
 .env
 .env.*
 !.env.example
+frontend/.env.production
 
 # 日志
 *.log

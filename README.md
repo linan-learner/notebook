@@ -16,6 +16,7 @@
 notebook/
 ├── frontend/          # 前端（Vite + Vue）
 ├── backend/           # 后端 API + WebSocket
+├── docs/              # 补充文档（如部署说明）
 └── README.md
 ```
 
@@ -76,6 +77,12 @@ npm run build
 ## GitHub 仓库
 
 - 主页：<https://github.com/linan-learner/notebook>
+
+## 线上部署
+
+前端需静态托管，后端需单独部署；完整步骤见：**[docs/DEPLOY.md](docs/DEPLOY.md)**（含环境变量、`gh-pages` 发布与常见问题）。
+
+---
 
 ## 许可证
 
