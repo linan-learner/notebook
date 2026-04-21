@@ -44,6 +44,7 @@ npm run dev
 |------|------|------|
 | `PORT` | 服务端口 | `3000` |
 | `JWT_SECRET` | JWT 签名密钥 | 开发用占位字符串 |
+| `DB_PATH` | SQLite 文件路径（建议生产挂载持久磁盘目录） | `backend/data/notebook.db` |
 
 示例（PowerShell）：
 
@@ -78,9 +79,40 @@ npm run build
 
 - 主页：<https://github.com/linan-learner/notebook>
 
+## 线上地址（已部署）
+
+- 前端（GitHub Pages）：<https://linan-learner.github.io/notebook/#/login>
+- 后端（Render API）：<https://notebook-backend-n8d1.onrender.com/api/health>
+
 ## 线上部署
 
 前端需静态托管，后端需单独部署；完整步骤见：**[docs/DEPLOY.md](docs/DEPLOY.md)**（含环境变量、`gh-pages` 发布与常见问题）。
+
+Render（或同类平台）使用 SQLite 时，建议为后端服务挂载 **Persistent Disk**，并设置：
+
+```bash
+DB_PATH=/var/data/notebook.db
+```
+
+这样实例重启/重新部署后，用户与流水数据不会因为临时文件系统而丢失。
+
+### 线上环境变量（后端）
+
+| 变量 | 示例值 | 说明 |
+|------|--------|------|
+| `PORT` | `3000`（由 Render 注入） | 服务监听端口 |
+| `JWT_SECRET` | `请替换为强随机密钥` | 登录态签名密钥 |
+| `DB_PATH` | `/var/data/notebook.db` | SQLite 持久化数据库路径 |
+
+### 前端发布更新（已验证）
+
+```bash
+cd frontend
+npm run build
+npx gh-pages -d dist
+```
+
+发布后若页面仍请求旧地址，先使用无痕窗口或强制刷新（`Ctrl + Shift + R`）清缓存再测试。
 
 ---
 

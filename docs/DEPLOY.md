@@ -56,6 +56,24 @@ npm run build
 
 ---
 
+## 可选：用 Vercel 部署前端（替代 GitHub Pages）
+
+与 GitHub Pages 二选一即可。Vercel 上站点通常在**域名根路径**，构建时需指定 `VITE_BASE=/`：
+
+1. 登录 [vercel.com](https://vercel.com)，用 GitHub 授权。
+2. **Add New Project** → 导入仓库 `notebook`。
+3. **Root Directory** 选 **`frontend`**。
+4. **Environment Variables**（构建前配置）：
+   - `VITE_BASE` = `/`（静态资源从根路径加载，必配）
+   - `VITE_API_BASE` = `https://你的 Render 后端`（不要末尾 `/`）
+   - `VITE_WS_URL` = `wss://你的 Render 后端`
+5. **Build Command**：`npm run build`，**Output Directory**：`dist`（Vite 默认）。
+6. Deploy。
+
+完成后访问形如 `https://xxx.vercel.app`。后端仍建议部署在 **Render**（见上文）。
+
+---
+
 ## 第三步：发布 `dist` 到 GitHub Pages
 
 ### 做法 A：用 `gh-pages` 工具（推荐）

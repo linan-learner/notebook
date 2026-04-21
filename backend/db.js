@@ -2,11 +2,14 @@ const path = require('path')
 const fs = require('fs')
 const sqlite3 = require('sqlite3').verbose()
 
-const dataDir = path.join(__dirname, 'data')
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true })
+const defaultDbPath = path.join(__dirname, 'data', 'notebook.db')
+const dbPathRaw = process.env.DB_PATH && String(process.env.DB_PATH).trim()
+const dbPath = dbPathRaw || defaultDbPath
+const dbDir = path.dirname(dbPath)
+
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true })
 }
-const dbPath = path.join(dataDir, 'notebook.db')
 
 const db = new sqlite3.Database(dbPath)
 
